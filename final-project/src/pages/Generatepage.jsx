@@ -33,7 +33,6 @@ const Generatepage = () => {
     dispatch(setImages(newImages));
     setLoading(false)
   };
-  console.log(image)
 
   useEffect(() => {
     dispatch(setBrushState('touch'))

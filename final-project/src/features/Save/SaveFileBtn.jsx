@@ -6,7 +6,7 @@ import styles from './Save.module.css'
 const SaveFileBtn = () => {
 
     const store = useSelector((state) => state.cur_project)
-    console.log(store, '스토어')
+    // console.log(store, '스토어')
 
     const createFile = async () => {
 

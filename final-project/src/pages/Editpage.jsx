@@ -10,11 +10,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { setBrushState } from "../store/canvasSlice";
 import axios from "axios";
 import Canvas from "../features/inpainting/components/Canvas";
-import BarLoader from "react-spinners/BarLoader";
 import { setImages } from "../store";
-import { fabric } from "fabric";
+import { setBubble, setCntofBubble } from "../store/canvasSlice";
 import InpaintingTutorial from "../features/tutorial/EditTutorial";
-import TextBox from '../features/speechbubble/components/TextBox'
+
 const Editpage = () => {
   const dispatch = useDispatch();
   const cur_project = useSelector((state) => state.cur_project);
@@ -27,9 +26,9 @@ const Editpage = () => {
     dispatch(setBrushState("touch"));
   }, []);
 
+
   /** 툴버튼 활성화/비활성화 */
   const activeBtn = (idx) => {
-    console.log("clicked!!!");
     if (gray[idx] == "#fff") {
       let copy = [...gray];
       copy[idx] = "#A4A4A4";
@@ -39,31 +38,33 @@ const Editpage = () => {
       copy[idx] = "#fff";
       setGray(copy);
     }
-    console.log(gray);
+    if (brushState.BubbleIsActivated == false) {
+      dispatch(setBubble(true))
+    } else {
+      dispatch(setBubble(false))
+    }
   };
 
   /** 인페인팅 */
   const regenerate = async ({ prompt, mask_data, init_data, idx }) => {
     setLoading(true)
-      console.log('mask : ', mask_data)
-      console.log('image : ', init_data)
+    console.log('mask : ', mask_data)
+    console.log('image : ', init_data)
     // if (mask_data.length > 0) {
-      const result = await axios.post(
-      // 'http://114.110.130.45:5000/inpainting'
-      // 'http://127.0.0.1:8000/inpainting' => 로컬
+    const result = await axios.post(
       'http://64.98.238.3:41012/inpainting', {
-        edited_prompt : prompt[idx],
-        mask_data : mask_data,
-        image_data : init_data[idx]
-      })
-      let copy = [...init_data]
-      copy[idx] = result.data
-      dispatch(setImages(copy))
-      console.log(cur_project)
-      setLoading(false)
+      edited_prompt: prompt[idx],
+      mask_data: mask_data,
+      image_data: init_data[idx]
+    })
+    let copy = [...init_data]
+    copy[idx] = result.data
+    dispatch(setImages(copy))
+    // console.log(cur_project)
+    setLoading(false)
     // } 
   }
-
+  // 
   return (
     <div className={styles.Wrapper}>
       <InpaintingTutorial />
@@ -101,7 +102,6 @@ const Editpage = () => {
                 ref={(el) => (btnRef.current[1] = el)}
                 onClick={() => {
                   return (
-
                     activeBtn(1)
                   );
                 }}
@@ -118,14 +118,18 @@ const Editpage = () => {
               >
                 <img src={"/images/Effect_bubble.svg"}></img>
               </button>
-              <button
-                className={styles.toolBtn}
-                style={{ backgroundColor: gray[3] }}
-                ref={(el) => (btnRef.current[3] = el)}
-                onClick={() => activeBtn(3)}
-              >
-                <img src={"/images/text.svg"}></img>
-              </button>
+              {
+                brushState.BubbleIsActivated
+                  ?
+                  <button
+                    className={styles.toolBtn}
+                    onClick={console.log('yaho')}
+                  >
+
+                    <img src={"/images/plus_gray.png"}></img>
+                  </button>
+                  : null
+              }
             </div>
             <ColorButton
               text={"재생성"}
@@ -145,13 +149,16 @@ const Editpage = () => {
             <div className={styles.loading_bar}>
               <img style={{ transform: 'translateY(150px)', width: '200px', height: '200px' }} src='/images/consoupLoadingLogo.gif'></img>
             </div>
-          ) : cur_project.images.length != 0 ? (
-            <>
-              <Canvas />
-            </>
-          ) : null}
+          ) :
+            // cur_project.images.length != 0 ? 
+            (
+              <div>
+                <Canvas />
+              </div>
+            )
+            //  : null
+          }
 
-          <TextBox></TextBox>
         </section>
         <section className={styles.designTab}>
           <OutputImgs />

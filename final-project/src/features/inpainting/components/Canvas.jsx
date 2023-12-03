@@ -3,7 +3,7 @@ import { ReactSketchCanvas } from 'react-sketch-canvas'
 import styles from '../styles/Canvas.module.scss'
 import { useSelector, useDispatch } from 'react-redux';
 import { setMask } from '../../../store';
-import {fabric} from 'fabric'
+import TextBox from '../../speechbubble/components/TextBox';
 const style = {
     border: '0.0625rem solid #9c9c9c',
     borderRadius: '0.25rem',
@@ -16,6 +16,7 @@ const Canvas = ({speech,setSpeech}) => {
     const curIdx = cur_project.curIdx
     const canvasRef = useRef();
     const img = cur_project.images[curIdx]
+    
     const onChange = async () => {
         const paths = await canvasRef.current.exportPaths();
         if (paths.length) {
@@ -25,23 +26,21 @@ const Canvas = ({speech,setSpeech}) => {
             dispatch(setMask(splited_data))
         }
     };
-    //  아래의 해당 로직 대신 이미지가 재생성되면 리덕스에 저장된 해당 이미지와 프롬프트 값 바꾸는 것으로 변경하기
 
-    
-    // const predictions = props.predictions.map((prediction) => {
-    //     prediction.lastImage = prediction.output
-    //     ? prediction.output[prediction.output.length - 1]
-    //     : null;
-    //     return prediction;
-    // });                                                                                                                                                          
-
-    // const predicting = predictions.some((prediction) => !prediction.output);
-    // const lastPrediction = predictions[predictions.length - 1];
- 
-  
-
+    useEffect(()=>{
+        const addBubblesArr = Array(brushState.cntofBubble).fill(0);
+        console.log(typeof addBubblesArr);
+    }, )
     return (
         <div className={styles.canvasWrapper} >
+            {
+                brushState.BubbleIsActivated == true ?
+                // {
+                //     addBubblesArr.map((item, idx)=>)
+                // }
+                <TextBox/>
+                : null
+            }
             {
                 cur_project.images ?
                 <img
@@ -58,7 +57,6 @@ const Canvas = ({speech,setSpeech}) => {
                  className={styles.canvasBox}
             >
                 <ReactSketchCanvas
-                    
                     className={styles.sketchCanvas}
                     onChange={onChange}
                     ref={canvasRef}
