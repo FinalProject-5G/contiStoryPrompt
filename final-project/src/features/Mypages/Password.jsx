@@ -29,7 +29,7 @@ const Password = () => {
       <h4>내정보수정</h4>
       <div>
         <h6>비밀번호</h6>
-        <input onChange={(e) => setpassword(e.target.value)}></input>
+        <input type="password" onChange={(e) => setpassword(e.target.value)}></input>
         <button className={styles.checkpw} onClick={vaildPassword}>확인</button>
       </div>
     </div>

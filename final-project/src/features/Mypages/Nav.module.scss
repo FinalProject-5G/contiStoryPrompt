@@ -87,6 +87,7 @@ $gray : #91969D;
             @include btn-st;
             border : 1px solid gray;
             margin-left: 1vw;
+            padding: 10px;
         }
         .checkpw {
             @include btn-st;

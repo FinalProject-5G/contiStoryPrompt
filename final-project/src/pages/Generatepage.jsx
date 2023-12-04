@@ -26,7 +26,7 @@ const Generatepage = () => {
     let newImages = []
     for (let i = 0; i < promptLen; i++) {
       const result = await axios.get(
-        `http://64.98.238.3:41012/?prompt==${prompt[i]},%20pencil%20style,%20cartoon,%20fast%20sketch,%20rough%20sketch,%20croquis`
+        `http://114.34.116.46:41443/?prompt==${prompt[i]},%20pencilstyle,%20nopencil,%20cartoon,%20fast%20sketch,%20rough%20sketch,%20croquis`
       );
       newImages = [...newImages, result.data];
     }
@@ -48,21 +48,23 @@ const Generatepage = () => {
         </nav>
         <div className={styles.contentsWrapper}>
           <section className={styles.designTab}>
-            <ToggleBtn tab1={"생성"} tab2={"편집"} />
-            <BoxItem title={"생성할 컷 수 지정"} />
+            <ToggleBtn tab1={"드로잉"} tab2={"리터칭"} />
+            <BoxItem title={"드로잉 컷 수 지정"} />
             <CutsNumber />
-            <BoxItem title={"콘티 내용 입력"} />
+            <BoxItem title={"콘티 내용"} />
             <div className={styles.promptsBox}>
               <Prompts />
             </div>
-            <ColorButton text={"생성하기"} func={generate} parameter={{ prompt: promptsList, promptLen: promptsNum }} generate={loading} />
+            <ColorButton text={"드로잉"} func={generate} parameter={{ prompt: promptsList, promptLen: promptsNum }} generate={loading} />
           </section>
           <section className={styles.canvas}>
             {
               loading ?
-                <div className={styles.loading_bar}>
-                  <img style={{transform:'translateY(150px)',width:'200px',height:'200px'}}src = '/images/consoupLoadingLogo.gif'></img>
-                </div>
+                <section className={styles.canvasblack}>
+                  <div className={styles.loading_bar}>
+                    <img style={{ transform: 'translateY(120px)', width: '180px', height: '320px' }} src='/images/consoupLoadingLogo.gif'></img>
+                  </div>
+                </section>
                 : image.length > 0 ?
                   <Canvas />
                   : null
@@ -78,3 +80,4 @@ const Generatepage = () => {
 }
 
 export default Generatepage
+

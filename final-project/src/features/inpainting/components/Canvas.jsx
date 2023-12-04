@@ -4,6 +4,7 @@ import styles from '../styles/Canvas.module.scss'
 import { useSelector, useDispatch } from 'react-redux';
 import { setMask } from '../../../store';
 import TextBox from '../../speechbubble/components/TextBox';
+import { setSpeechList } from '../../../store/canvasSlice';
 const style = {
     border: '0.0625rem solid #9c9c9c',
     borderRadius: '0.25rem',
@@ -27,19 +28,13 @@ const Canvas = ({speech,setSpeech}) => {
         }
     };
 
-    useEffect(()=>{
-        const addBubblesArr = Array(brushState.cntofBubble).fill(0);
-        console.log(typeof addBubblesArr);
-    }, )
+    
     return (
         <div className={styles.canvasWrapper} >
             {
                 brushState.BubbleIsActivated == true ?
-                // {
-                //     addBubblesArr.map((item, idx)=>)
-                // }
-                <TextBox/>
-                : null
+                    <TextBox/>
+                : null 
             }
             {
                 cur_project.images ?

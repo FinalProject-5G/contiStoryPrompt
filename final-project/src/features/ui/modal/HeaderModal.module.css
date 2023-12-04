@@ -22,6 +22,7 @@
 }
 
 .headerModalClose {
+  display: inline;
   background-color: transparent;
   position: relative;
   border: none;
@@ -38,7 +39,7 @@
   align-items: center;
 }
 .headerModalMiddle p {
-  margin: 5px;
+  margin: 0 5px 5px 5px;
 }
 .headerModalMiddle .headerLogOutBtn {
   margin-top: 4px;

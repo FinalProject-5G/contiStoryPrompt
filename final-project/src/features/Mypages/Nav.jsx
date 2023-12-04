@@ -9,8 +9,11 @@ const Nav = () => {
   const navLists = [' 내정보 수정', ' 마이 콘티']
 
   useEffect(() => {
+    if (!location) {
+      sessionStorage.setItem('location', 'images/defaultImage.png');
+    }
     setLocation(sessionStorage.getItem('location'))
-  }, [setLocation])
+  }, [setLocation]);
 
   return (
     <nav className={styles.navBox}>
@@ -47,9 +50,7 @@ const Nav = () => {
         </NavLink>
 
       </div >
-
       {modal && <FileUpload setModal={setModal} location={location} setLocation={setLocation}></FileUpload>}
-
     </nav >
   )
 }

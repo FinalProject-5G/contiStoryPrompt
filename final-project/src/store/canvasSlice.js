@@ -8,6 +8,7 @@ const canvasState = createSlice({
         BubbleIsActivated: false,
         speechList: [],
         cntOfBubble: 0,
+        
     },
 
     reducers: {
@@ -26,10 +27,8 @@ const canvasState = createSlice({
             state.speechList = action.payload;
         },
         setCntofBubble: (state, action) => {
-            state.cntOfBubble = action.payload;
+            state.cntOfBubble += action.payload;
         }
-        
-
     }
 })
 

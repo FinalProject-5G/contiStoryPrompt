@@ -29,9 +29,10 @@ const HeaderModal = ({ isOpen, isClose }) => {
           }}>
           </div>
           <p>{sessionStorage.getItem('nickname')}님</p>
-
+          <hr style={{ width: '100%', border: 'solid 1px #DBDBDB', margin: '5px' }} />
           <Link to='/myconti' onClick={isClose}>마이콘티</Link>
           <Link to='/mypassword' onClick={isClose}>내정보 수정</Link>
+          <hr style={{ width: '100%', border: 'solid 1px #DBDBDB', margin: '5px' }} />
           <p>ContiStoryPrompt</p>
           <button className={styles.headerLogOutBtn} onClick={() => logOut()}>로그아웃 <img src='/images/export_icon.svg' /></button>
         </div>

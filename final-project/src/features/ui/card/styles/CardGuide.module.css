@@ -44,7 +44,8 @@
 .linkGenerate > button {
   transform: translateY(30%);
   width: 280px;
-  height: 2.3em;
+  font-size: 1.1rem;
+  padding-top: 1vh;
 }
 
 @media screen and (max-width: 1200px) {

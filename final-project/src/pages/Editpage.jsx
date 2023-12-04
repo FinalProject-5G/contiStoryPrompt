@@ -7,7 +7,7 @@ import PromptBox from "../features/inpainting/components/PromptBox";
 import ColorButton from "../features/ui/button/ColorButton/ColorButton";
 import OutputImgs from "../features/inpainting/components/OutputImgs";
 import { useDispatch, useSelector } from "react-redux";
-import { setBrushState } from "../store/canvasSlice";
+import { setBrushState, setSpeechList } from "../store/canvasSlice";
 import axios from "axios";
 import Canvas from "../features/inpainting/components/Canvas";
 import { setImages } from "../store";
@@ -52,7 +52,7 @@ const Editpage = () => {
     console.log('image : ', init_data)
     // if (mask_data.length > 0) {
     const result = await axios.post(
-      'http://64.98.238.3:41012/inpainting', {
+      'http://114.34.116.46:41443/inpainting', {
       edited_prompt: prompt[idx],
       mask_data: mask_data,
       image_data: init_data[idx]
@@ -64,7 +64,21 @@ const Editpage = () => {
     setLoading(false)
     // } 
   }
-  // 
+  let cnt = 0;     
+  /** 말풍선 추가 함수 */
+  const addBubble = () => {
+    // console.log("말풍선 개수", brushState.cntOfBubble);
+    dispatch(setCntofBubble(cnt+1))    
+    cnt++;
+  } 
+
+  
+  useEffect(()=> {
+    const bubbleArr = Array(brushState.cntOfBubble).fill(" ");
+    dispatch(setSpeechList(bubbleArr))
+    console.log("cnt : ", cnt)
+  }, [setCntofBubble])
+
   return (
     <div className={styles.Wrapper}>
       <InpaintingTutorial />
@@ -73,11 +87,11 @@ const Editpage = () => {
       </nav>
       <div className={styles.contentsWrapper}>
         <div>
-          <ToggleBtn tab1={"생성"} tab2={"편집"} />
+          <ToggleBtn tab1={"드로잉"} tab2={"리터칭"} />
           <section className={styles.designTab}>
-            <BoxItem title={"프롬프트"} />
+            <BoxItem title={"콘티 내용"} />
             <PromptBox />
-            <BoxItem title={"인페인팅"} />
+            <BoxItem title={"리터칭 영역 선택"} />
             <p>설명</p>
             <button
               className={styles.toolBtn}
@@ -123,16 +137,15 @@ const Editpage = () => {
                   ?
                   <button
                     className={styles.toolBtn}
-                    onClick={console.log('yaho')}
+                    onClick={ () => addBubble() }
                   >
-
                     <img src={"/images/plus_gray.png"}></img>
                   </button>
                   : null
               }
             </div>
             <ColorButton
-              text={"재생성"}
+              text={"리터칭"}
               func={regenerate}
               parameter={{
                 prompt: cur_project.prompts,
@@ -145,20 +158,18 @@ const Editpage = () => {
           </section>
         </div>
         <section className={styles.canvas}>
-          {loading ? (
-            <div className={styles.loading_bar}>
-              <img style={{ transform: 'translateY(150px)', width: '200px', height: '200px' }} src='/images/consoupLoadingLogo.gif'></img>
-            </div>
-          ) :
-            // cur_project.images.length != 0 ? 
-            (
-              <div>
+          {
+            loading ?
+              <section className={styles.canvasblack}>
+                <div className={styles.loading_bar}>
+                  <img style={{ transform: 'translateY(120px)', width: '180px', height: '320px' }} src='/images/consoupLoadingLogo.gif'></img>
+                </div>
+              </section>
+              : 
+              // cur_project.images.length != 0 ?
                 <Canvas />
-              </div>
-            )
-            //  : null
+                // : null
           }
-
         </section>
         <section className={styles.designTab}>
           <OutputImgs />

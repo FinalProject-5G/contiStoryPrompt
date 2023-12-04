@@ -1,1 +1,18 @@
-/*# sourceMappingURL=TextBox.module.css.map */
+.speechBox {
+  text-align: center;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.speechBoxContent {
+  position: absolute;
+  z-index: 100;
+  width: 300px;
+  height: 150px;
+  background-color: 0, 0, 0, 0.7;
+  border-radius: 15px;
+  cursor: grab;
+  position: absolute;
+}/*# sourceMappingURL=TextBox.module.css.map */

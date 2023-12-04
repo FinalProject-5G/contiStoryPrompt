@@ -11,7 +11,7 @@ const SaveFileBtn = () => {
     const createFile = async () => {
 
         await axios.post('/upload/createFile', {
-             store
+            store
         })
             .then(res => {
                 console.log(res.data);

@@ -25,6 +25,7 @@ $gray : #91969D;
 }
 
 .headerModalClose{
+    display: inline;
 background-color: transparent;
 position:relative;
 border: none;
@@ -41,7 +42,7 @@ font-weight: bold;
     justify-content: center;
     align-items: center;
     p{
-        margin:5px;
+        margin:0 5px 5px 5px;
     }
     .headerLogOutBtn{
         margin-top:4px;
@@ -59,7 +60,7 @@ font-weight: bold;
         background-color: white;
     }
     a:hover{
-        background-color: $gray 
+        background-color: $gray ;
     }
 
     a{

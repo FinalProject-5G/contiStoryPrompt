@@ -10,7 +10,7 @@ const Joinbox = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("1");
   const [samePassword, setSamePassword] = useState("");
-  const [vaildPasswordAlert,setVaildPasswordAlert] = useState(false)
+  const [vaildPasswordAlert, setVaildPasswordAlert] = useState(false)
   const [nickname, setNickname] = useState("");
 
 
@@ -48,9 +48,9 @@ const Joinbox = () => {
         alert("가입 가능한 아이디입니다.");
       }
     })
-    .catch(function (error) {
-      console.log(error.toJSON());
-    });;
+      .catch(function (error) {
+        console.log(error.toJSON());
+      });;
   };
 
   return (
@@ -78,13 +78,13 @@ const Joinbox = () => {
         </div>
         <input
           className={styles.formItem}
-          type=""
+          type="password"
           placeholder="비밀번호"
           onChange={(e) => setPassword(e.target.value)}
         ></input>
         <input
           className={styles.formItem}
-          type=""
+          type="password"
           placeholder="비밀번호 확인"
           onChange={(e) => setSamePassword(e.target.value)}
         ></input>

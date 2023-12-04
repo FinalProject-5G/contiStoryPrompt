@@ -22,7 +22,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    
     button:last-child {
         margin-top: 1em;    
         width: 90%;
@@ -32,6 +31,17 @@
 .canvas {
     background-color: #ECECEC;
     width:  58.18vw;
+}
+
+.canvasblack {
+    background-color: black;
+    width:  100vw;
+    height: 100%;
+    z-index: 999999;
+    transform: translateX(-21.04vw);
+    position: absolute;
+    top:0;
+    opacity: 80%;
 }
 
 .promptsBox {

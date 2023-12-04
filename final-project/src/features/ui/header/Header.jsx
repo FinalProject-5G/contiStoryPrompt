@@ -38,12 +38,12 @@ const Header = () => {
           <Link to='/'><img className={styles.logo} src='images/logo.png' alt='logo' /></Link>
           <div className={styles.headerRight}>
 
-            { sessionStorage.getItem('email') ?
-            <Link className={styles.headerGenerateBtn}to='/generate'>{Button('새 콘티 생성')}</Link>
-            :
-            <Link className={styles.headerGenerateBtn}to='/login'>{Button('새 콘티 생성')}</Link>
+            {sessionStorage.getItem('email') ?
+              <Link className={styles.headerGenerateBtn} to='/generate'>{Button('새 콘티 생성')}</Link>
+              :
+              <Link className={styles.headerGenerateBtn} to='/login'>{Button('새 콘티 드로잉')}</Link>
             }
-            
+
             {
               sessionStorage.getItem('nickname') ?
                 <div className={styles.profileBox} onClick={() => setIsModalOpen(!isModalOpen)}>

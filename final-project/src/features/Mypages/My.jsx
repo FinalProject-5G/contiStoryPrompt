@@ -19,10 +19,13 @@ const My = () => {
   const samePasswordRef = useRef();
   const [location, setLocation] = useState(sessionStorage.getItem('location'));
 
-
   useEffect(() => {
+    if (!location) {
+      sessionStorage.setItem('location', 'images/defaultImage.png');
+    }
     setLocation(sessionStorage.getItem('location'))
-  }, [setLocation])
+  }, [setLocation]);
+
 
   const changeMyPage = () => {
     console.log('email', sessionStorage.getItem("email"), 'nick', nickName)
@@ -59,7 +62,7 @@ const My = () => {
   };
 
   const removeImg = () => {
-    setLocation(sessionStorage.setItem("location", 'images/defaultImage.png'))
+    sessionStorage.setItem("location", 'images/defaultImage.png')
     window.location.href = "/mypage"
   };
 
