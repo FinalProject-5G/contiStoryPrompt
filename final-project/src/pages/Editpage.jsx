@@ -60,11 +60,12 @@ const Editpage = () => {
     let copy = [...init_data]
     copy[idx] = result.data
     dispatch(setImages(copy))
-    // console.log(cur_project)
     setLoading(false)
     // } 
   }
+
   let cnt = 0;     
+  
   /** 말풍선 추가 함수 */
   const addBubble = () => {
     // console.log("말풍선 개수", brushState.cntOfBubble);

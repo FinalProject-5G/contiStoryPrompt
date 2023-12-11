@@ -27,7 +27,6 @@ const Canvas = ({speech,setSpeech}) => {
             dispatch(setMask(splited_data))
         }
     };
-
     
     return (
         <div className={styles.canvasWrapper} >
